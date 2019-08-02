@@ -1,4 +1,9 @@
 
+#calculator {
+  margin: 4em 8em;
+  position: absolute; 
+}
+
 .digit {
   border: 2px solid salmon;
 }

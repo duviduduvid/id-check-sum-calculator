@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Grid, Label } from 'semantic-ui-react';
+import { Segment, Grid, Label, Divider, Header, Icon } from 'semantic-ui-react';
 import IdDigits from './IdDigits';
 import calculateIsrCheckSum from './CalculatorLogic';
+import './Calculator.css'
 
 
 function Calculator() {
@@ -12,34 +13,51 @@ function Calculator() {
   const [checkSum, setCheckSum] = useState(initialCheckSum);
 
   const updateDigit = (index, newDigitValue) => {
-    setDigits(digits.map(digit => (digit.index === index ? {index, value: newDigitValue} : digit)));
+    setDigits(digits.map(digit => 
+      (digit.index === index ? {index, value: newDigitValue} : digit)));
   };
 
   useEffect(() => {
     const isAllDigitsSet = () => 
       !digits.some(digit => digit.value === '');
 
-    setCheckSum(isAllDigitsSet() ? calculateIsrCheckSum(digits.map(digit => digit.value)) : initialCheckSum);
+    setCheckSum(isAllDigitsSet() ? 
+      calculateIsrCheckSum(digits.map(digit => digit.value)) : initialCheckSum);
   }, [digits]);
 
   return (
-    <div>
-      <h1>ID Control Digit Calculator</h1>
-      <Grid centered divided='vertically'>
-        <Grid.Row>
-          <IdDigits 
-            digits={digits}
-            updateDigit={updateDigit}
-          />
-        </Grid.Row>
+    <div id='calculator'>
+      <Segment raised padded='very'>
+        <Header as='h2' icon textAlign='center'>
+          <Icon name='calculator' circular/>
+          <Header.Content>ID Control Digit Calculator</Header.Content>
+        </Header>
 
-        <Grid.Row>
-          <Label circular size='massive'>
-            {checkSum}
-          </Label>
-        </Grid.Row>
-      </Grid>
+        <Grid centered>
+          <Grid.Row>
+            <IdDigits 
+              digits={digits}
+              updateDigit={updateDigit}
+            />
+          </Grid.Row>
+        </Grid>
+
+        <Divider horizontal>
+          <Header as='h3'>
+            Result
+          </Header>
+        </Divider>
+
+        <Grid centered>
+          <Grid.Row>
+            <Label circular size='massive'>
+              {checkSum}
+            </Label>
+          </Grid.Row>
+        </Grid>
+      </Segment>
     </div>
+
   );
 }
 
