@@ -1,0 +1,8 @@
+
+.digit {
+  border: 2px solid salmon;
+}
+
+.digits-container {
+  display: flex;
+}
