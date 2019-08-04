@@ -1,11 +1,6 @@
 import React from 'react';
-import { Input, Segment } from 'semantic-ui-react';
-
-const style = {
-  input: {
-    width: '3em',
-  }
-}
+import { Input } from 'semantic-ui-react';
+import './Digit.css';
 
 const Digit = props => {
 
@@ -21,12 +16,10 @@ const Digit = props => {
   );
 
   return (
-    <Segment>
-      <Input style={style.input}
+      <Input
         value={props.digit.value} 
         onChange={handleDigitChange}
       />
-    </Segment>
   );
 }
 

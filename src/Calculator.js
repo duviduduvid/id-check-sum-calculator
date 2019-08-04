@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Segment, Grid, Label, Divider, Header, Icon } from 'semantic-ui-react';
 import IdDigits from './IdDigits';
 import calculateIsrCheckSum from './CalculatorLogic';
-import './Calculator.css'
+import './Calculator.css';
 
 
 function Calculator() {
@@ -27,9 +27,9 @@ function Calculator() {
 
   return (
     <div id='calculator'>
-      <Segment raised padded='very'>
-        <Header as='h2' icon textAlign='center'>
-          <Icon name='calculator' circular/>
+      <Segment raised padded='very' color='teal'>
+        <Header id='calculator-header' as='h2' icon textAlign='center'>
+          <Icon name='calculator' circular color='teal'/>
           <Header.Content>ID Control Digit Calculator</Header.Content>
         </Header>
 
@@ -50,7 +50,7 @@ function Calculator() {
 
         <Grid centered>
           <Grid.Row>
-            <Label circular size='massive'>
+            <Label circular size='massive' color='teal'>
               {checkSum}
             </Label>
           </Grid.Row>

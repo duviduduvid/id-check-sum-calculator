@@ -1,13 +1,9 @@
 
 #calculator {
-  margin: 4em 8em;
+  margin: 3em 8em;
   position: absolute; 
 }
 
-.digit {
-  border: 2px solid salmon;
-}
-
-.digits-container {
-  display: flex;
+#calculator-header {
+  margin-bottom: 30px;
 }
