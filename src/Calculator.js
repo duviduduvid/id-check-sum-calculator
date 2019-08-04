@@ -6,15 +6,33 @@ import './Calculator.css';
 
 
 function Calculator() {
-  const initialDigits = Array(8).fill('').map((value, index) => ({value, index}));
+  const initialDigits = Array(8).fill('').map((value, index) => {
+    return index === 0 ? ({value, index, isFocused: true}) : ({value, index, isFocused: false});
+  });
   const initialCheckSum = '?';
 
   const [digits, setDigits] = useState(initialDigits);
   const [checkSum, setCheckSum] = useState(initialCheckSum);
 
   const updateDigit = (index, newDigitValue) => {
-    setDigits(digits.map(digit => 
-      (digit.index === index ? {index, value: newDigitValue} : digit)));
+    const getNextFocusedInput = () => (
+      newDigitValue !== '' ?
+        (index + 1 < 8 ? index + 1 : index) : (index - 1 >= 0 ? index - 1: index)
+    );
+
+    const newDitigs = digits.map(digit => {
+      if (digit.index === index) {
+        return ({...digit, value: newDigitValue, isFocused: false});
+      }
+      else if (digit.index === getNextFocusedInput()) {
+        return ({...digit, isFocused: true});
+      }
+      else {
+        return ({...digit, isFocused: false});
+      }
+    });
+    
+    setDigits(newDitigs);
   };
 
   useEffect(() => {
@@ -48,13 +66,11 @@ function Calculator() {
           </Header>
         </Divider>
 
-        <Grid centered>
-          <Grid.Row>
+        <Segment basic textAlign='center'>
             <Label circular size='massive' color='teal'>
               {checkSum}
             </Label>
-          </Grid.Row>
-        </Grid>
+        </Segment>
       </Segment>
     </div>
 
