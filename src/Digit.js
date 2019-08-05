@@ -2,6 +2,8 @@ import React, { useRef, useEffect } from 'react';
 import { Input } from 'semantic-ui-react';
 import './Digit.css';
 
+const BACKSPACE_BUTTON = 8;
+
 const Digit = props => {
   const inputElement = useRef(null);
 
@@ -22,7 +24,7 @@ const Digit = props => {
       : Math.abs(value % 10);
 
   const handleDeleteDigit = event => {
-    if (event.keyCode === 8 || event.keyCode === 46) {
+    if (event.keyCode === BACKSPACE_BUTTON) {
       props.handleDelete();
     }
   };
