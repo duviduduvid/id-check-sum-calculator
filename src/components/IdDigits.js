@@ -1,7 +1,7 @@
 import React from 'react';
 import { Grid } from 'semantic-ui-react';
 import { connect } from 'react-redux';
-import { setDigit, focusNextDigit, focusPreviousDigit } from './action';
+import { setDigit, focusNextDigit, focusPreviousDigit } from '../actions/action';
 import Digit from './Digit';
 
 const IdDigits = props => (
@@ -12,8 +12,8 @@ const IdDigits = props => (
           <Digit
             digit={digit}
             isFocused={props.focusedDigit === digit.index}
-            updateDigit={props.updateDigit}
-            handleDelete={props.moveFocusBack}
+            handleChange={props.setDigit}
+            handleDelete={props.focusPreviousDigit}
           />
         </Grid.Column>
       ))}
@@ -27,13 +27,13 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  updateDigit: digit => {
+  setDigit: digit => {
     dispatch(setDigit(digit));
     if (digit.value !== '') {
       dispatch(focusNextDigit());
     }
   },
-  moveFocusBack: () => {
+  focusPreviousDigit: () => {
     dispatch(focusPreviousDigit());
   }
 });

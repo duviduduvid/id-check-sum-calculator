@@ -10,7 +10,7 @@ const Digit = props => {
   const handleDigitChange = event => {
     const input = event.target.value.replace(/\D/g, '');
     const value = input && parseInt(input, 10);
-    props.updateDigit({
+    props.handleChange({
       index: props.digit.index,
       value: validateAndNormalize(value)
     });

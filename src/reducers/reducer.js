@@ -2,7 +2,8 @@ import {
   FOCUS_NEXT_DIGIT,
   FOCUS_PREVIOUS_DIGIT,
   SET_DIGIT
-} from './actionsTypes';
+} from '../actions/actionsTypes';
+import { incrementIndex, decrementIndex, replaceArrayItem } from './reducer-utils';
 
 const initialState = {
   focusedDigit: 0,
@@ -42,11 +43,4 @@ function reducer(state = initialState, action) {
   }
 }
 
-const replaceArrayItem = (array, itemToReplace, replaceAtIndex) =>
-  array.map((item, index) => (index === replaceAtIndex ? itemToReplace : item));
-
-const incrementIndex = previousIndex =>
-  previousIndex + 1 < 8 ? previousIndex + 1 : previousIndex;
-const decrementIndex = previousIndex =>
-  previousIndex - 1 >= 0 ? previousIndex - 1 : previousIndex;
 export default reducer;

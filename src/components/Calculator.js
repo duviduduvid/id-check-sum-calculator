@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Segment, Grid, Label, Divider, Header, Icon } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import IdDigits from './IdDigits';
-import calculateIsrCheckSum from './CalculatorLogic';
+import calculateIsrCheckSum from '../utils/calculator-utils';
 import './Calculator.css';
 
 const Calculator = props => {
