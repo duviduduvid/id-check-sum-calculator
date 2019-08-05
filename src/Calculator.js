@@ -1,32 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Segment, Grid, Label, Divider, Header, Icon } from 'semantic-ui-react';
 import { connect } from 'react-redux';
-import { focusNextDigit, focusPreviousDigit } from './action';
 import IdDigits from './IdDigits';
 import calculateIsrCheckSum from './CalculatorLogic';
 import './Calculator.css';
 
 const Calculator = props => {
-  const initialDigits = Array(8)
-    .fill('')
-    .map((value, index) => ({ value, index }));
+  const digits = props.digits;
   const initialCheckSum = '?';
-
-  const [digits, setDigits] = useState(initialDigits);
   const [checkSum, setCheckSum] = useState(initialCheckSum);
-
-  const updateDigit = (index, newDigitValue) => {
-    setDigits(
-      digits.map(digit =>
-        digit.index === index ? { index, value: newDigitValue } : digit
-      )
-    );
-    if (newDigitValue !== '') {
-      props.focusNextDigit();
-    } else {
-      props.focusPreviousDigit();
-    }
-  };
 
   useEffect(() => {
     const isAllDigitsSet = () => !digits.some(digit => digit.value === '');
@@ -48,12 +30,12 @@ const Calculator = props => {
 
         <Grid centered>
           <Grid.Row>
-            <IdDigits digits={digits} updateDigit={updateDigit} />
+            <IdDigits />
           </Grid.Row>
         </Grid>
 
         <Divider horizontal>
-          <Header as="h3">Result</Header>
+          <Header as="h4">Result</Header>
         </Divider>
 
         <Segment basic textAlign="center">
@@ -66,12 +48,8 @@ const Calculator = props => {
   );
 };
 
-const mapDispatchToProps = dispatch => ({
-  focusNextDigit: () => dispatch(focusNextDigit()),
-  focusPreviousDigit: () => dispatch(focusPreviousDigit())
+const mapStateToProps = state => ({
+  digits: state.digits
 });
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(Calculator);
+export default connect(mapStateToProps)(Calculator);
