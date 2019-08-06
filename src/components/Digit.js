@@ -4,13 +4,13 @@ import './Digit.css';
 
 const BACKSPACE_BUTTON = 8;
 
-const Digit = props => {
+const Digit = ({ digit, isFocused, handleChange, handleDelete }) => {
   const inputElement = useRef(null);
 
   const handleChangeDigit = event => {
-    props.handleChange({
+    handleChange({
       value: validateDigit(event.target.value),
-      index: props.digit.index
+      index: digit.index
     });
   };
 
@@ -25,12 +25,12 @@ const Digit = props => {
 
   const handleDeleteDigit = event => {
     if (event.keyCode === BACKSPACE_BUTTON) {
-      props.handleDelete(props.digit);
+      handleDelete(digit);
     }
   };
 
   useEffect(() => {
-    if (props.isFocused) {
+    if (isFocused) {
       inputElement.current.focus();
     }
   });
@@ -38,7 +38,7 @@ const Digit = props => {
   return (
     <Input
       ref={inputElement}
-      value={props.digit.value}
+      value={digit.value}
       onChange={handleChangeDigit}
       onKeyDown={handleDeleteDigit}
     />

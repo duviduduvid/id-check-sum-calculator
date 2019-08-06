@@ -8,16 +8,16 @@ import {
 } from '../actions/action';
 import Digit from './Digit';
 
-const IdDigits = props => (
+const IdDigits = ({ digits, focusedDigit, setDigit, focusPreviousDigit }) => (
   <Grid centered>
     <Grid.Row columns={8}>
-      {props.digits.map(digit => (
+      {digits.map(digit => (
         <Grid.Column key={digit.index}>
           <Digit
             digit={digit}
-            isFocused={props.focusedDigit === digit.index}
-            handleChange={props.setDigit}
-            handleDelete={props.focusPreviousDigit}
+            isFocused={focusedDigit === digit.index}
+            handleChange={setDigit}
+            handleDelete={focusPreviousDigit}
           />
         </Grid.Column>
       ))}
