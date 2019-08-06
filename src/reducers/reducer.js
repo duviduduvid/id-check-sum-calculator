@@ -9,7 +9,7 @@ import {
   replaceArrayItem
 } from './reducer-utils';
 
-const initialState = {
+export const initialState = {
   focusedDigit: 0,
   digits: Array(8)
     .fill('')
