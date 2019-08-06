@@ -2,8 +2,12 @@ import {
   FOCUS_NEXT_DIGIT,
   FOCUS_PREVIOUS_DIGIT,
   SET_DIGIT
-} from '../actions/actionsTypes';
-import { incrementIndex, decrementIndex, replaceArrayItem } from './reducer-utils';
+} from '../actions/actions-types';
+import {
+  incrementIndex,
+  decrementIndex,
+  replaceArrayItem
+} from './reducer-utils';
 
 const initialState = {
   focusedDigit: 0,
@@ -23,20 +27,27 @@ function reducer(state = initialState, action) {
         digits: previousDigits
       };
     case FOCUS_PREVIOUS_DIGIT:
+      const deletedDigit = { value: '', index: action.payload.index };
       return {
-        focusedDigit: decrementIndex(previousIndex),
-        digits: previousDigits
+        focusedDigit:
+          action.payload.value === ''
+            ? decrementIndex(previousIndex)
+            : deletedDigit.index,
+        digits: replaceArrayItem(
+          previousDigits,
+          deletedDigit,
+          deletedDigit.index
+        )
       };
     case SET_DIGIT:
       const modifiedDigit = action.payload;
-      const newDigits = replaceArrayItem(
-        previousDigits,
-        modifiedDigit,
-        modifiedDigit.index
-      );
       return {
         focusedDigit: modifiedDigit.index,
-        digits: newDigits
+        digits: replaceArrayItem(
+          previousDigits,
+          modifiedDigit,
+          modifiedDigit.index
+        )
       };
     default:
       return state;

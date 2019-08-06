@@ -7,25 +7,25 @@ const BACKSPACE_BUTTON = 8;
 const Digit = props => {
   const inputElement = useRef(null);
 
-  const handleDigitChange = event => {
-    const input = event.target.value.replace(/\D/g, '');
-    const value = input && parseInt(input, 10);
+  const handleChangeDigit = event => {
     props.handleChange({
-      index: props.digit.index,
-      value: validateAndNormalize(value)
+      value: validateDigit(event.target.value),
+      index: props.digit.index
     });
   };
 
-  const validateAndNormalize = value =>
-    Number.isNaN(value) || value === ''
+  const validateDigit = value => {
+    value = parseInt(value.replace(/\D/g, ''), 10);
+    return Number.isNaN(value) || value === ''
       ? ''
       : value >= 0 && value <= 9
-      ? Math.floor(value)
-      : Math.abs(value % 10);
+      ? value
+      : value % 10;
+  };
 
   const handleDeleteDigit = event => {
     if (event.keyCode === BACKSPACE_BUTTON) {
-      props.handleDelete();
+      props.handleDelete(props.digit);
     }
   };
 
@@ -39,7 +39,7 @@ const Digit = props => {
     <Input
       ref={inputElement}
       value={props.digit.value}
-      onChange={handleDigitChange}
+      onChange={handleChangeDigit}
       onKeyDown={handleDeleteDigit}
     />
   );

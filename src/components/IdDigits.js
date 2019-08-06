@@ -1,7 +1,11 @@
 import React from 'react';
 import { Grid } from 'semantic-ui-react';
 import { connect } from 'react-redux';
-import { setDigit, focusNextDigit, focusPreviousDigit } from '../actions/action';
+import {
+  setDigit,
+  focusNextDigit,
+  focusPreviousDigit
+} from '../actions/action';
 import Digit from './Digit';
 
 const IdDigits = props => (
@@ -33,8 +37,8 @@ const mapDispatchToProps = dispatch => ({
       dispatch(focusNextDigit());
     }
   },
-  focusPreviousDigit: () => {
-    dispatch(focusPreviousDigit());
+  focusPreviousDigit: digit => {
+    dispatch(focusPreviousDigit(digit));
   }
 });
 
