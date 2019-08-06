@@ -8,7 +8,12 @@ import {
 } from '../actions/action';
 import Digit from './Digit';
 
-const IdDigits = ({ digits, focusedDigit, setDigit, focusPreviousDigit }) => (
+export const IdDigits = ({
+  digits,
+  focusedDigit,
+  setDigit,
+  focusPreviousDigit
+}) => (
   <Grid centered>
     <Grid.Row columns={8}>
       {digits.map(digit => (
