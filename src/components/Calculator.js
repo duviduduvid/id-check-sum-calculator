@@ -5,8 +5,7 @@ import IdDigits from './IdDigits';
 import calculateIsrCheckSum from '../utils/calculator-utils';
 import './Calculator.css';
 
-const Calculator = props => {
-  const digits = props.digits;
+export const Calculator = ({ digits }) => {
   const initialCheckSum = '?';
   const [checkSum, setCheckSum] = useState(initialCheckSum);
 
