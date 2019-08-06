@@ -10,7 +10,7 @@ describe('reducer-utils', () => {
       expect(incrementIndex(0)).toBe(1);
       expect(incrementIndex(5)).toBe(6);
     });
-    it('should not increment index higher than 7', () => {
+    it('should not increment index higher than or equal to 7', () => {
       expect(incrementIndex(7)).toBe(7);
       expect(incrementIndex(12)).toBe(7);
     });
@@ -21,7 +21,7 @@ describe('reducer-utils', () => {
       expect(decrementIndex(1)).toBe(0);
       expect(decrementIndex(7)).toBe(6);
     });
-    it('should not decrement index lower than 0', () => {
+    it('should not decrement index lower than or equal to 0', () => {
       expect(decrementIndex(0)).toBe(0);
       expect(decrementIndex(-3)).toBe(0);
     });
@@ -38,7 +38,7 @@ describe('reducer-utils', () => {
     it('should not mutate original array', () => {
       const expected = [...originalArray];
       replaceArrayItem(originalArray, newItem, 1);
-      expect(expected).toEqual(originalArray);
+      expect(originalArray).toEqual(expected);
     });
     it('should change the item in the specified index', () => {
       const expected = [originalArray[0], newItem, originalArray[2]];
